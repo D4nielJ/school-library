@@ -11,6 +11,4 @@ class Student < Person
   end
 end
 
-daniel = Student.new(27, 'Daniel', '11-C')
 
-p daniel

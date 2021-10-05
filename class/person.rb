@@ -17,7 +17,4 @@ class Person
   end
 end
 
-person = Person.new(17, 'Diego', parent_permission: false)
 
-p person
-p person.can_use_services?
