@@ -1,8 +1,8 @@
 require_relative 'person'
 
 class Teacher < Person
-  def initialize(specialization, age, *optional_data)
-    super(age, *optional_data)
+  def initialize(*args, specialization)
+    super(*args)
     @specialization = specialization
   end
 
@@ -11,6 +11,6 @@ class Teacher < Person
   end
 end
 
-gabriel = Teacher.new('roedores', 18, 'gabriel')
+gabriel = Teacher.new(18, 'gabriel', 'roedores')
 
 p gabriel
