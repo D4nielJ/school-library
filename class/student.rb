@@ -1,8 +1,8 @@
 require_relative 'person'
 
 class Student < Person
-  def initialize(classroom, age, *optional_data)
-    super(age, *optional_data)
+  def initialize(*args, classroom)
+    super(*args)
     @classroom = classroom
   end
 
@@ -10,7 +10,3 @@ class Student < Person
     "¯\(ツ)/¯"
   end
 end
-
-daniel = Student.new('A1', 27, 'daniel')
-
-p daniel
