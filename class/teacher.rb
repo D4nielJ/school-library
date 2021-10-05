@@ -10,7 +10,3 @@ class Teacher < Person
     true
   end
 end
-
-gabriel = Teacher.new(18, 'gabriel', 'roedores')
-
-p gabriel
