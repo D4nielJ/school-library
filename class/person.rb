@@ -24,7 +24,7 @@ class Person
     @corrector.correct_name(name)
   end
 
-  def add_rental(book, date)
+  def add_rental(date, book)
     Rental.new(date, book, self)
   end
 end
