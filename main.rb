@@ -1,8 +1,8 @@
 require_relative 'ui/ui_methods'
-
 class App
-  def initialize
+  def initialize(ui_methods)
     @ui = UserInterface.new
+    @ui_methods = ui_methods
   end
 
   def init
@@ -15,25 +15,16 @@ class App
     puts '6 - List all rentals for a given person'
     puts '7 - Exit'
     choice_number = gets.chomp
+    execute(choice_number)
   end
 
   def execute(number)
-    map = {
-      1 => list_all_books,
-      2 => list_all_people,
-      3 => create_a_person,
-      4 => create_a_book,
-      5 => create_a_rental,
-      6 => list_all_rentals,
-      7 => exit_app,
-      8 => no_valid_method
-    }
-    @ui.map(number)
+    @ui.ui_map(number)
   end
 end
 
 def main
-  app = App.new
+  app = App.new()
   app.init
 end
 

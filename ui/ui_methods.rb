@@ -1,4 +1,19 @@
 class UserInterface
+  UI_MAP = {
+    1 => list_all_books,
+    2 => list_all_people,
+    3 => create_a_person,
+    4 => create_a_book,
+    5 => create_a_rental,
+    6 => list_all_rentals,
+    7 => exit_app,
+    8 => no_valid_method
+  }.freeze
+
+  def ui_map(number)
+    UI_MAP(number)
+  end
+
   def list_all_books
     "I'm working"
   end
