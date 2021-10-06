@@ -5,11 +5,11 @@ class Person
   attr_accessor :name, :age
 
   def initialize(age, name = 'unknown', parent_permission: true)
-    @name = validate_name(name)
     @age = age
     @parent_permission = parent_permission
     @corrector = Corrector.new
     @rentals = []
+    @name = validate_name(name)
   end
 
   def of_age?
