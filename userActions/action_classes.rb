@@ -46,14 +46,14 @@ class CreatePerson < AbstractAction
   end
 
   def do_action
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
     person_type = gets.chomp
     return puts 'Invalid option' if person_type != '1' && person_type != '2'
 
-    print 'Age: '
+    print 'Age:'
     age = gets.chomp
 
-    print 'Name: '
+    print 'Name:'
     name = gets.chomp
 
     person = create_person(age, name, person_type)
@@ -63,7 +63,7 @@ class CreatePerson < AbstractAction
 
   def create_person(age, name, person_type)
     if person_type == '1'
-      print 'Has parent permission? [Y/N]: '
+      print 'Has parent permission? [Y/N]:'
       parent_permission = gets.chomp
       parent_permission = parent_permission.downcase == 'y'
       puts '-----'
@@ -73,7 +73,7 @@ class CreatePerson < AbstractAction
       puts "Parent permission: #{parent_permission}"
       Student.new(age: age, name: name, parent_permission: parent_permission)
     else
-      print 'Specialization: '
+      print 'Specialization:'
       specialization = gets.chomp
       puts '-----'
       puts 'Teacher with:'
@@ -91,7 +91,16 @@ class CreateBook < AbstractAction
     @name = 'Create a book'
   end
 
-  def do_action; end
+  def do_action
+    print 'Title:'
+    title = gets.chomp
+
+    print 'Author:'
+    author = gets.chomp
+
+    @state[:books] << Book.new(title: title, author: author)
+    puts 'Book created successfully'
+  end
 end
 
 class CreateRental < AbstractAction
@@ -100,7 +109,31 @@ class CreateRental < AbstractAction
     @name = 'Create a rental'
   end
 
-  def do_action; end
+  def do_action
+    puts 'Select a book from the following list by number:'
+
+    @state[:books].each_with_index do |book, idx|
+      puts "#{idx + 1}) Title: \"#{book.title}\", Author: #{book.author}"
+    end
+    book_idx = gets.chomp.to_i - 1
+
+    puts 'Select a person from the following list by number (not id):'
+    @state[:people].each_with_index do |person, idx|
+      puts "#{idx + 1}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
+    person_idx = gets.chomp.to_i - 1
+
+    print 'Date:'
+    date = gets.chomp
+
+    @state[:rentals] << Rental.new(
+      date: date,
+      book: @state[:books][person_idx],
+      people: @state[:people][person_idx]
+    )
+
+    puts 'Rental created successfully'
+  end
 end
 
 class ListRentals < AbstractAction
