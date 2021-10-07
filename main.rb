@@ -12,9 +12,8 @@ class App
       puts "#{i + 1} - #{action.name}"
     end
     number_choose = gets.chomp.to_i
-    new_state = @actions[number_choose - 1].do_action
-    @state = new_state
-    @state[:books] = %w[book1 book2 book3]
+    @state = @actions[number_choose - 1].do_action
+    @state[:books].concat(%w[book1 book2 book3])
     @actions[number_choose - 1].do_action
   end
 end

@@ -19,6 +19,7 @@ class ListBooks < AbstractAction
 
   def do_action
     p @state[:books]
+    @state
   end
 end
 
