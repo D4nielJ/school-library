@@ -1,3 +1,5 @@
+Dir[File.join(__dir__, '../class', '*.rb')].each { |file| require_relative file }
+
 class AbstractAction
   attr_reader :name
   attr_accessor :state

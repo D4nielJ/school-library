@@ -3,7 +3,15 @@ require_relative 'userActions/action_classes'
 class App
   def initialize(initial_state)
     @state = initial_state
-    @actions = [ListBooks.new(@state), ListPeople.new(@state)]
+    @actions = [
+      ListBooks.new(@state),
+      ListPeople.new(@state),
+      CreatePerson.new(@state),
+      CreateBook.new(@state),
+      CreateRental.new(@state),
+      ListRentals.new(@state),
+      Exit.new(@state)
+    ]
   end
 
   def init
@@ -13,8 +21,7 @@ class App
     end
     number_choose = gets.chomp.to_i
     @state = @actions[number_choose - 1].do_action
-    @state[:books].concat(%w[book1 book2 book3])
-    @actions[number_choose - 1].do_action
+    init unless @state[:exit]
   end
 end
 
@@ -22,7 +29,8 @@ def main
   initial_state = {
     books: [],
     people: [],
-    rentals: []
+    rentals: [],
+    exit: false
   }
   app = App.new(initial_state)
   app.init
