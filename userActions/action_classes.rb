@@ -128,8 +128,8 @@ class CreateRental < AbstractAction
 
     @state[:rentals] << Rental.new(
       date: date,
-      book: @state[:books][person_idx],
-      people: @state[:people][person_idx]
+      book: @state[:books][book_idx],
+      person: @state[:people][person_idx]
     )
 
     puts 'Rental created successfully'
@@ -142,7 +142,16 @@ class ListRentals < AbstractAction
     @name = 'List all rentals for a given person id'
   end
 
-  def do_action; end
+  def do_action
+    print 'ID of person:'
+    id = gets.chomp.to_i
+
+    rentals = @state[:rentals].filter { |rental| rental.person.id == id }
+    puts 'Rentals:'
+    rentals.each do |rental|
+      puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}"
+    end
+  end
 end
 
 class Exit < AbstractAction
