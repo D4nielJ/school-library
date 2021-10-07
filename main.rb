@@ -15,12 +15,14 @@ class App
   end
 
   def init
-    puts 'Please choose an option by enter in a number:'
+    puts '----- OOP School Library Software -----'
+    puts 'Please choose an option by entering a number:'
+    puts '-----'
     @actions.each_with_index do |action, i|
       puts "#{i + 1} - #{action.name}"
     end
     number_choose = gets.chomp.to_i
-    @state = @actions[number_choose - 1].do_action
+    @actions[number_choose - 1].do_action
     init unless @state[:exit]
   end
 end
@@ -33,6 +35,7 @@ def main
     exit: false
   }
   app = App.new(initial_state)
+  puts '----- Welcome to the ---->'
   app.init
 end
 
