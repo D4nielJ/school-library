@@ -3,10 +3,10 @@ require_relative 'person'
 class Student < Person
   attr_reader :classroom
 
-  def initialize(*args, classroom: nil)
-    super(*args)
+  def initialize(classroom: nil, **args)
     @classroom = classroom
     classroom.add_student(self) if classroom && !classroom.students.include?(self)
+    super(**args)
   end
 
   def classroom=(classroom)

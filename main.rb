@@ -22,7 +22,9 @@ class App
       puts "#{i + 1} - #{action.name}"
     end
     number_choose = gets.chomp.to_i
+    puts '-----'
     @actions[number_choose - 1].do_action
+    puts '-----'
     init unless @state[:exit]
   end
 end

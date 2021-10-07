@@ -5,6 +5,7 @@ classroom_b = Classroom.new('B')
 
 student_a = Student.new(17, 'Student A', classroom: classroom_a)
 student_b = Student.new(17, 'Student B', classroom: classroom_b)
+student_c = Student.new(17, 'Student B', parent_permission: false)
 
 book_a = Book.new(title: 'OOP and OOD with Ruby examples')
 book_b = Book.new(title: 'Twenty Thousand Leagues under the Sea', author: 'Julio Verne')
