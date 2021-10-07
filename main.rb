@@ -1,19 +1,21 @@
-require_relative 'action_classes'
+require_relative 'userActions/action_classes'
 
 class App
   def initialize(initial_state)
     @state = initial_state
-    @actions = [ListBooks.new, ListPeople.new]
+    @actions = [ListBooks.new(@state), ListPeople.new(@state)]
   end
 
   def init
     puts 'Please choose an option by enter in a number:'
-    @actions.methods.each_with_index do |method, i|
-      puts "#{i + 1} - #{method.name}"
+    @actions.each_with_index do |action, i|
+      puts "#{i + 1} - #{action.name}"
     end
     number_choose = gets.chomp.to_i
-    new_state = @actions.methods[number_choose - 1].do_action(@state)
+    new_state = @actions[number_choose - 1].do_action
     @state = new_state
+    @state[:books] = %w[book1 book2 book3]
+    @actions[number_choose - 1].do_action
   end
 end
 
