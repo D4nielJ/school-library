@@ -1,4 +1,4 @@
-require_relative 'userActions/action_classes'
+Dir[File.join(__dir__, 'userActions/subclass', '*.rb')].each { |file| require_relative file }
 
 class App
   def initialize(initial_state)
