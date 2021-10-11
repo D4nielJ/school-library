@@ -7,19 +7,12 @@ class App
       people: [],
       rentals: [],
       exit: false
-    }, state_fetcher: nil
+    }, state_fetcher: nil,
+    actions: []
   )
     @state_fetcher = state_fetcher
     @state = initial_state
-    @actions = [
-      ListBooks.new,
-      ListPeople.new,
-      CreatePerson.new,
-      CreateBook.new,
-      CreateRental.new,
-      ListRentals.new,
-      Exit.new
-    ]
+    @actions = actions
   end
 
   def init
