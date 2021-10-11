@@ -1,5 +1,14 @@
+Dir[File.join(__dir__, 'userActions/subclass', '*.rb')].each { |file| require_relative file }
+
 class App
-  def initialize(initial_state)
+  def initialize(
+    initial_state = {
+      books: [],
+      people: [],
+      rentals: [],
+      exit: false
+    }
+  )
     @state = initial_state
     @actions = [
       ListBooks.new(@state),
@@ -13,6 +22,7 @@ class App
   end
 
   def init
+    puts '----- Welcome to the ---->'
     puts '----- OOP School Library Software -----'
     puts 'Please choose an option by entering a number:'
     puts '-----'

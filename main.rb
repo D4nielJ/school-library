@@ -1,9 +1,9 @@
-Dir[File.join(__dir__, 'userActions/subclass', '*.rb')].each { |file| require_relative file }
+require_relative 'app/app'
+require_relative 'app/initial_state'
 
 def main
   initial_state = create_initial_state
   app = App.new(initial_state)
-  puts '----- Welcome to the ---->'
   app.init
 end
 
