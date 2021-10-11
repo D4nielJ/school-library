@@ -7,11 +7,11 @@ class ListRentals < AbstractAction
     @name = 'List all rentals for a given person id'
   end
 
-  def do_action
+  def do_action(state)
     print 'ID of person:'
     id = gets.chomp.to_i
 
-    rentals = @state[:rentals].filter { |rental| rental.person.id == id }
+    rentals = state[:rentals].filter { |rental| rental.person.id == id }
     puts 'Rentals:'
     rentals.each do |rental|
       puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}"

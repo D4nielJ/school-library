@@ -7,16 +7,16 @@ class CreateRental < AbstractAction
     @name = 'Create a rental'
   end
 
-  def do_action
+  def do_action(state)
     puts 'Select a book from the following list by number:'
 
-    @state[:books].each_with_index do |book, idx|
+    state[:books].each_with_index do |book, idx|
       puts "#{idx + 1}) Title: \"#{book.title}\", Author: #{book.author}"
     end
     book_idx = gets.chomp.to_i - 1
 
     puts 'Select a person from the following list by number (not id):'
-    @state[:people].each_with_index do |person, idx|
+    state[:people].each_with_index do |person, idx|
       puts "#{idx + 1}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
     person_idx = gets.chomp.to_i - 1
@@ -24,10 +24,10 @@ class CreateRental < AbstractAction
     print 'Date:'
     date = gets.chomp
 
-    @state[:rentals] << Rental.new(
+    state[:rentals] << Rental.new(
       date: date,
-      book: @state[:books][book_idx],
-      person: @state[:people][person_idx]
+      book: state[:books][book_idx],
+      person: state[:people][person_idx]
     )
 
     puts 'Rental created successfully'
