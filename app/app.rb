@@ -1,5 +1,4 @@
 Dir[File.join(__dir__, 'userActions/subclass', '*.rb')].each { |file| require_relative file }
-require_relative 'initial_state'
 
 class App
   def initialize(
@@ -8,9 +7,9 @@ class App
       people: [],
       rentals: [],
       exit: false
-    }
+    }, state_fetcher:
   )
-    @state_fetcher = HardcodedState.new
+    @state_fetcher = state_fetcher
     @state = initial_state
     @actions = [
       ListBooks.new,
