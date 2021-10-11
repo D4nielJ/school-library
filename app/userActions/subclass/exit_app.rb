@@ -7,8 +7,8 @@ class Exit < AbstractAction
     @name = 'Exit'
   end
 
-  def do_action
+  def do_action(state)
     p 'Come back soon'
-    @state[:exit] = true
+    state[:exit] = true
   end
 end

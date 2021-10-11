@@ -7,7 +7,7 @@ class CreatePerson < AbstractAction
     @name = 'Create a person'
   end
 
-  def do_action
+  def do_action(state)
     print 'Do you want to create a student (1) or a teacher (2)? [Input the number]:'
     person_type = gets.chomp
     return puts 'Invalid option' if person_type != '1' && person_type != '2'
@@ -19,7 +19,7 @@ class CreatePerson < AbstractAction
     name = gets.chomp
 
     person = create_person(age, name, person_type)
-    @state[:people] << person
+    state[:people] << person
     puts 'created succesfully'
   end
 

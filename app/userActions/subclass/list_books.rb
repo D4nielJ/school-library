@@ -7,8 +7,8 @@ class ListBooks < AbstractAction
     @name = 'List all books'
   end
 
-  def do_action
-    @state[:books].each do |book|
+  def do_action(state)
+    state[:books].each do |book|
       puts "Title: \"#{book.title}\", Author: #{book.author}"
     end
   end

@@ -7,8 +7,8 @@ class ListPeople < AbstractAction
     @name = 'List all people'
   end
 
-  def do_action
-    @state[:people].each do |person|
+  def do_action(state)
+    state[:people].each do |person|
       puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
   end
