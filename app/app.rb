@@ -7,7 +7,7 @@ class App
       people: [],
       rentals: [],
       exit: false
-    }, state_fetcher:
+    }, state_fetcher: nil
   )
     @state_fetcher = state_fetcher
     @state = initial_state
@@ -23,7 +23,7 @@ class App
   end
 
   def init
-    @state = @state_fetcher.fetch
+    @state = @state_fetcher.fetch if @state_fetcher
     puts '----- Welcome to the ---->'
     puts '----- OOP School Library Software -----'
     stay_idle
