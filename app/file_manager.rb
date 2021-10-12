@@ -2,6 +2,8 @@ require 'fileutils'
 require 'json'
 require_relative 'class/student'
 require_relative 'class/teacher'
+require_relative 'class/book'
+require_relative 'class/rental'
 
 class FileManager
   def initialize
@@ -9,24 +11,32 @@ class FileManager
   end
 
   def fetch
-    {
+    state = {
       books: [],
       people: [],
       rentals: [],
       exit: false
     }
 
-    ## Load files
+    fetch_books(state) if File.exist?("#{@adress}/books.json")
+    # fetch_people(state) if File.exist?("#{@adress}/people.json")
+    # fetch_rentals(state) if File.exist?("#{@adress}/rentals.json")
 
-    ## initial_state << books_array if books.json
-    ## initial_state << people_array if books.json
-    ## initial_state << rentals_array if books.json
+    state
+  end
+
+  def fetch_books(state)
+    books_json = File.read("#{@adress}/books.json")
+    p books_hash = JSON.parse(books_json)
+    books = books_hash.map { |book| Book.new(id: book['id'], title: book['title'], author: book['author']) }
+    state[:books].concat(books)
   end
 
   def save(state)
     create_files
     save_books(state)
     save_people(state)
+    save_rentals(state)
   end
 
   def create_files
@@ -37,7 +47,8 @@ class FileManager
   end
 
   def save_books(state)
-    books_json = JSON.generate(state[:books].map { |book| { id: book.id, title: book.title, author: book.author } })
+    books_hash = state[:books].map { |book| { id: book.id, title: book.title, author: book.author } }
+    books_json = JSON.generate(books_hash)
     File.open("#{@adress}/books.json", 'w') { |f| f.write books_json }
   end
 
@@ -58,8 +69,11 @@ class FileManager
     File.open("#{@adress}/people.json", 'w') { |f| f.write people_json }
   end
 
-  def save_rentals
-    books_json = JSON.generate(state[:books].map { |book| { title: book.title, author: book.author } })
-    File.open("#{@adress}/books.json", 'w') { |f| f.write books_json }
+  def save_rentals(state)
+    rentals_hash = state[:rentals].map do |rental|
+      { date: rental.date, book_id: rental.book.id, person_id: rental.person.id }
+    end
+    rentals_json = JSON.generate(rentals_hash)
+    File.open("#{@adress}/rentals.json", 'w') { |f| f.write rentals_json }
   end
 end
