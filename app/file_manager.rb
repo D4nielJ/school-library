@@ -20,19 +20,23 @@ class FileManager
 
     fetch_books(state) if File.exist?("#{@adress}/books.json")
     fetch_people(state) if File.exist?("#{@adress}/people.json")
-    # fetch_rentals(state) if File.exist?("#{@adress}/rentals.json")
+    fetch_rentals(state) if File.exist?("#{@adress}/rentals.json")
 
     state
   end
 
-  # def fetch_rentals(state)
-  #   rentals_json = File.read("#{@adress}/rentals.json")
-  #   p rentals_hash = JSON.parse(rentals_json)
-  #   rentals = rentals_hash.map do |_rental|
-  #     Rentals.new(id: rentals['id'], name: rentals['name'], author: book['author'])
-  #   end
-  #   state[:rentals].concat(rentals)
-  # end
+  def fetch_rentals(state)
+    rentals_json = File.read("#{@adress}/rentals.json")
+    p rentals_hash = JSON.parse(rentals_json)
+    rentals = rentals_hash.map do |rental|
+      Rental.new(
+        date: rental['date'],
+        book: state[:books].select { |book| book.id == rental['book_id'] }[0],
+        person: state[:people].select { |person| person.id == rental['person_id'] }[0]
+      )
+    end
+    state[:rentals].concat(rentals)
+  end
 
   def fetch_people(state)
     people_json = File.read("#{@adress}/people.json")
