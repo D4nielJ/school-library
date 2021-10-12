@@ -1,3 +1,8 @@
+require 'fileutils'
+require 'json'
+require_relative '../class/student'
+require_relative '../class/teacher'
+
 class OutputJson
   def initialize(adress = './app/data')
     @adress = adress

@@ -1,11 +1,6 @@
-require 'fileutils'
-require 'json'
 require_relative 'IO_class/input_json'
 require_relative 'IO_class/output_json'
-require_relative 'class/student'
-require_relative 'class/teacher'
-require_relative 'class/book'
-require_relative 'class/rental'
+
 
 class FileManager
   def initialize(adress: './app/data', input: InputJson, output: OutputJson)

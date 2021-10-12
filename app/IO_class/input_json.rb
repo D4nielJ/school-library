@@ -1,3 +1,9 @@
+require 'json'
+require_relative '../class/student'
+require_relative '../class/teacher'
+require_relative '../class/book'
+require_relative '../class/rental'
+
 class InputJson
   def initialize(adress = './app/data')
     @adress = adress
