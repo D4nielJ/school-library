@@ -55,7 +55,7 @@ class FileManager
         specialization: person.specialization }
     end
 
-    people_json = JSON.generate(students_hash.concat(teachers_hash))
+    people_json = JSON.generate({ students: students_hash, teachers: teachers_hash })
     File.open("#{@adress}/people.json", 'w') { |f| f.write people_json }
   end
 
