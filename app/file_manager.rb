@@ -25,12 +25,26 @@ class FileManager
     state
   end
 
+  # def fetch_rentals(state)
+  #   rentals_json = File.read("#{@adress}/rentals.json")
+  #   p rentals_hash = JSON.parse(rentals_json)
+  #   rentals = rentals_hash.map do |_rental|
+  #     Rentals.new(id: rentals['id'], name: rentals['name'], author: book['author'])
+  #   end
+  #   state[:rentals].concat(rentals)
+  # end
+
   def fetch_people(state)
     people_json = File.read("#{@adress}/people.json")
     p people_hash = JSON.parse(people_json)
-    people = people_hash.map { |people| People.new(id: people['id'], name: people['name'], author: book['author']) }
-    state[:people].concat(people)
-  end  
+    students = people_hash['students'].map do |p|
+      Student.new(id: p['id'], age: p['age'], name: p['name'], parent_permission: p['parent_permission'])
+    end
+    teachers = people_hash['teachers'].map do |p|
+      Teacher.new(id: p['id'], age: p['age'], name: p['name'], specialization: p['specialization'])
+    end
+    state[:people].concat(teachers).concat(students)
+  end
 
   def fetch_books(state)
     books_json = File.read("#{@adress}/books.json")
