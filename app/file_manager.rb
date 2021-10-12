@@ -1,7 +1,6 @@
 require_relative 'IO_class/input_json'
 require_relative 'IO_class/output_json'
 
-
 class FileManager
   def initialize(adress: './app/data', input: InputJson, output: OutputJson)
     @adress = adress
