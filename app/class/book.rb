@@ -2,9 +2,10 @@ require_relative 'rental'
 
 class Book
   attr_reader :rentals
-  attr_accessor :title, :author
+  attr_accessor :title, :author, :id
 
-  def initialize(title:, author: 'anonymous')
+  def initialize(title:, id: Random.rand(1..100_000), author: 'anonymous')
+    @id = id
     @title = title
     @author = author
     @rentals = []

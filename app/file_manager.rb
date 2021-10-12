@@ -37,7 +37,7 @@ class FileManager
   end
 
   def save_books(state)
-    books_json = JSON.generate(state[:books].map { |book| { title: book.title, author: book.author } })
+    books_json = JSON.generate(state[:books].map { |book| { id: book.id, title: book.title, author: book.author } })
     File.open("#{@adress}/books.json", 'w') { |f| f.write books_json }
   end
 
@@ -45,22 +45,21 @@ class FileManager
     students = state[:people].select { |person| person.instance_of?(Student) }
 
     students_hash = students.map do |person|
-      { name: person.name, age: person.age, parent_permission: person.parent_permission }
+      { id: person.id, name: person.name, age: person.age, parent_permission: person.parent_permission }
     end
 
     teachers = state[:people].select { |person| person.instance_of?(Teacher) }
 
     teachers_hash = teachers.map do |person|
-      { name: person.name, age: person.age,
-        specialization: person.specialization }
+      { id: person.id, name: person.name, age: person.age, specialization: person.specialization }
     end
 
     people_json = JSON.generate({ students: students_hash, teachers: teachers_hash })
     File.open("#{@adress}/people.json", 'w') { |f| f.write people_json }
   end
 
-  # def save_rentals
-  #   books_json = JSON.generate(state[:books].map { |book| { title: book.title, author: book.author } })
-  #   File.open("#{@adress}/books.json", 'w') { |f| f.write books_json }
-  # end
+  def save_rentals
+    books_json = JSON.generate(state[:books].map { |book| { title: book.title, author: book.author } })
+    File.open("#{@adress}/books.json", 'w') { |f| f.write books_json }
+  end
 end
