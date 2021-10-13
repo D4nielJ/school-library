@@ -1,10 +1,10 @@
-Dir[File.join(__dir__, '../class', '*.rb')].each { |file| require_relative file }
+require_relative '../class/index'
 
 describe 'When testing Book class' do
   it 'should return the correct title and author with getters' do
     test_book = Book.new(title: 'testName', author: 'testAuthor')
-    expect(test_book.title).to eq 'testName'
-    expect(test_book.author).to eq 'testAuthor'
+    expect(test_book.title).to eql 'testName'
+    expect(test_book.author).to eql 'testAuthor'
   end
 
   it 'should return the correct title and author with getters' do
