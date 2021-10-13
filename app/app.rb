@@ -7,16 +7,16 @@ class App
       people: [],
       rentals: [],
       exit: false
-    }, state_fetcher: nil,
+    }, state_manager: nil,
     actions: []
   )
-    @state_fetcher = state_fetcher
+    @state_manager = state_manager
     @state = initial_state
     @actions = actions
   end
 
   def init
-    @state = @state_fetcher.fetch if @state_fetcher
+    @state = @state_manager.fetch if @state_manager
     puts '----- Welcome to the ---->'
     puts '----- OOP School Library Software -----'
     stay_idle
@@ -34,6 +34,13 @@ class App
     puts '-----'
     @actions[number_choose - 1].do_action(@state)
     puts '-----'
-    stay_idle unless @state[:exit]
+
+    return exit if @state[:exit]
+
+    stay_idle
+  end
+
+  def exit
+    @state_manager.save(@state)
   end
 end

@@ -1,9 +1,9 @@
 require_relative 'app/app'
-require_relative 'app/initial_state'
+require_relative 'app/file_manager'
 
 def main
   app = App.new(
-    state_fetcher: HardcodedState.new,
+    state_manager: FileManager.new,
     actions: [
       ListBooks.new,
       ListPeople.new,
