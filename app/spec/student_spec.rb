@@ -12,5 +12,8 @@ describe Student do
     expect(student.id).to be_between(1, 100_000).inclusive
     expect(student.of_age?).to eql false
     expect(student.can_use_services?).to eql false
+    expect(student.play_hookey).to eql "¯\(ツ)/¯"
+    expect(student.instance_of?(Student)).to eql true
+    expect(student.is_a?(Person)).to eql true
   end
 end
