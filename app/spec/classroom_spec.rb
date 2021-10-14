@@ -1,4 +1,4 @@
-Dir[File.join(__dir__, '../class', '*.rb')].each { |file| require_relative file }
+require_relative '../class/index'
 
 describe 'Classroom class' do
   context 'Creating a new classroom' do
