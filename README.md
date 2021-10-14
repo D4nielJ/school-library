@@ -28,7 +28,11 @@ To get a local copy up and running follow these simple example steps.
 
 - Clone this repository.
 - CD to the folder.
-- Run `Ruby` + any file to run some tests
+- Run `Ruby main.rb` to initiate.
+
+### Scripts
+
+- You can use `rspec app/spec` to run available tests.
 
 ## Authors
 
